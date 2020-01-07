@@ -25,39 +25,6 @@
 	 	}
 	 	
 	 }
-
-    // if (isset($_POST['register'])){
-    //     $fullname = addslashes($_POST['nameLogup']);
-    //     $uname = addslashes($_POST['unameLogup']);
-    //     $password = addslashes($_POST['pswLogup']);
-    //     $password1 = addslashes($_POST['pswLogup1']);
-
-    //     if (!$uname || !$fuulname || !$password) {
-    //         echo "Please input all information. <a href='javascript: history.go(-1)'>Trở lại</a>";
-    //         exit;
-    //     }
-
-    //     for($i = 0; $i < count($result2); $i++) { 
-    //         if($uname==$result2[$i][1]&& $password==$result2[$i][2] && $fullName==$result2[$i][3] ){
-    //             $check=true;
-    //             echo "Account exit! Log in!<a href='javascript: history.go(-1)'>Trở lại</a>";
-    //             exit;
-    //         }
-    //         else{
-    //             $check=false;
-    //         }
-
-    //     }
-
-    //     if ($check==false) {
-    //         $pos="user";
-    //         $sql2 = "INSERT into Users values(null,'".$uname."','".$password."','".$fullName."','".$pos."')";
-    //         $db->query($sql2);
-    //         echo "Log up successful!<a href='javascript: history.go(-1)'>Log in your account</a>";
-    //         exit;
-    //     }
-
-    // } 
 ?>
 <!DOCTYPE html>
 <html>

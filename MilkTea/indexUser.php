@@ -29,12 +29,12 @@
 
   /*========================Detail==========================*/
 
-  if (isset($_POST["detail"])) {
-    $img = $_POST["image"];
-    $name = $_POST["name"];
-    $price = $_POST["price"];
-    $type = $_POST["type"];
-  }
+  // if (isset($_POST["detail"])) {
+  //   $img = $_POST["image"];
+  //   $name = $_POST["name"];
+  //   $price = $_POST["price"];
+  //   $type = $_POST["type"];
+  // }
 
 ?>
 
@@ -45,23 +45,12 @@
   <link rel="stylesheet" type="text/css" href="milktea.css">
 </head>
 <body>
-  <div class="flex">
-    <h1 style="width: 100%; color: white; background-color: brown; text-align: center;">
-       MILKTEA SHOP
-        <marquee style="color: white" >
-            Welcom to our milk tea shop
-            <img src="image/milk.jpg" style="width: 20px; margin-top: 20px;">
-            <img src="image/milk.jpg" style="width: 20px; margin-top: 20px;">
-        </marquee>
-    </h1> 
-  </div>
-
   <div class="header">
     <p>Liên hệ: Nguyễn Yến Nhi</p>
     <p>Địa chỉ: 101B Lê Hữu Trác, Sơn Trà Đà Nẵng</p>
     <p style="margin-right: 400px">Phone: 0354236247</p>
     <form action="index.php">
-      <button name="logout" type="submit" style="background-color: green">Log out</button>
+      <button name="logout" type="submit" style="background-color: red">Log out</button>
     </form>
   </div>
 
@@ -80,24 +69,24 @@
   </div>
    
     <div class="menu">
-    <div class="menu a">
-      <a href="indexUser.php">TRANG CHỦ</a>
-      <a href="Gioi Thieu">GIỚI THIỆU</a>
-      <a href="Tin Tuc">TIN TỨC</a>
-      <a href="Huong Dan">HƯỚNG DẪN ĐẶT HÀNG</a>
-      <a href="Lien He">LIÊN HỆ</a>
-    </div>
-    <div class="search">
-      <button input class="search" type="text" placeholder="Search" name="">
-          <img src="image/icon.png" alt="icon.png" style="margin-left: 250px" width="15px" height="15px">
+      <div class="menu a">
+        <a href="indexUser.php">TRANG CHỦ</a>
+        <a href="Gioi Thieu">GIỚI THIỆU</a>
+        <a href="Tin Tuc">TIN TỨC</a>
+        <a href="Huong Dan">HƯỚNG DẪN ĐẶT HÀNG</a>
+        <a href="Lien He">LIÊN HỆ</a>
+      </div>
+      <div class="search">    
+        <input class="search" type="text" placeholder="Search" name=""> 
+         <!-- <button style="margin-top: 15px;"><img src="image/icon.png" alt="icon.png" width="30px">
+         </button>     -->
+      </div>
+      <div class="cart">
+       <button style="background-color: sandybrown">
+        <img src="image/cart.jpg" alt="icon.png" width="15px" height="15px"> CART
       </button>
+      </div>
     </div>
-    <div class="cart">
-     <button style="background-color: green">
-      <img src="image/cart.jpg" alt="icon.png" width="15px" height="15px"> CART
-    </button>
-    </div>
-  </div>
 
   <!--Hien Thi San Pham--> 
 
@@ -111,8 +100,8 @@
       <p style="color: brown" class="item-milk-type"><?php echo $milkteas[$i]->getType() ?></p>
       <h2 class="item-milk-price"><?php echo $milkteas[$i]->getDisplayPrice() ?></h2>
       <form action="" method="post" class="btn">
-        <button name="detail" style="margin-right: 30px; background-color: brown">Detail</button>
-       <button name="order" style="margin-left: 30px; background-color: brown">Order</button>
+        <button name="detail" style="margin-right: 30px; background-color: sandybrown" onclick="detail(<?php echo $milkteas[$i]->id; ?>)">Detail</button>
+       <button name="order" style="margin-left: 30px; background-color: red">Order</button>
       </form>
     </div>
 
@@ -123,7 +112,7 @@
       <hr>
       <div class="footer">
         <div class="footer-lienhe">
-          <h1 style="color: black">THÔNG TIN LIÊN HỆ</h1>
+          <h1 style="color: white">THÔNG TIN LIÊN HỆ</h1>
           <hr>
           <p>Địa Chỉ: 101B Lê Hữu Trác, Sơn Trà, Đà Nẵng</p>
           <p>Phone: 035 4236 247</p>
@@ -131,7 +120,7 @@
           <p>Email: nhi.nguyen@gmail.com</p>
         </div>
         <div class="footer-giaohang">
-          <h1 style="color: black">CHÍNH SÁCH</h1>
+          <h1 style="color: white">CHÍNH SÁCH</h1>
           <hr>
           <p>Chính Sách Giao Hàng</p>
           <p>Chính Sách Vận CHuyển</p>
@@ -139,7 +128,7 @@
           <p>Khách Hàng Thân Thiết</p>
         </div>
         <div class="footer-menu">
-          <h1 style="color: black">MENU</h1>
+          <h1 style="color: white">MENU</h1>
           <hr>
           <p>Coffee</p>
           <p>Milk Tea</p>

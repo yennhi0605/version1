@@ -4,20 +4,6 @@
   require "Model/Juice_Tea.php";
   require "Model/Milktea.php";
   require "Model/Smoothie.php";
-  // require "main.php";
-
-  // $sql = "SELECT * FROM Users";
-  // $result = $db->query($sql)->fetch_all();
-
-  // $user = null;
-  // if(isset($_POST["username"]) && isset($_POST["password"])){
-  //   $username = $_POST["username"];
-  //   $password = $_POST["password"];
-  //   $sql = "SELECT * from Users where username='$username' and password='$password'";
-  //   $user = $db->query($sql)->fetch_object("User");
-  // } else {
-    
-  // }
 
   $sql = "SELECT * from MilkTeas";
   $result = $db->query($sql)->fetch_all(MYSQLI_ASSOC);
@@ -41,14 +27,40 @@
     }
   }
 
-  //Delete product//
-
-  if(isset($_POST['delete'])){
-    $del='DELETE FROM milkteas WHERE id='.$_POST['delete'];
-    $db->query($del)->fetch_all();
+  //Admin delete product//
+  
+  if(isset($_POST["delete"])){
+    $id = $_POST["delete"];
+    $sql = "Delete FROM milkteas where id=". $id .";";
+    $db->query($sql);
   }
 
-  
+  //Admin add product //
+
+    if(isset($_POST["add"])){
+      $image=$_POST["img"];
+      $name=$_POST["namePr"];
+      $type=$_POST["type"];
+      $price=$_POST["price"];   
+
+      $sql = "INSERT INTO milkteas() VALUES(null,'".$name."','".$price."','".$type."','image/".$image."')";
+      $db->query($sql);
+
+      $sql = "SELECT * from MilkTeas";
+      $result = $db->query($sql)->fetch_all(MYSQLI_ASSOC);
+
+    } 
+
+    //Admin edit product//
+
+    if(isset($_POST['edit'])){
+      $name_edit = $_POST['namePr'];
+      $price_edit = $_POST['price'];
+      $type_edit = $_POST['type'];
+      $image_edit = $_POST['img'];
+      $stm = 'UPDATE milkteas SET name="'.$name_edit.'", price='.$price_edit.', type="'.$type_edit.'", image="image/'.$image_edit.'" WHERE id='.$_POST['edit'].'';
+      $db->query($stm)->fetch_all(); 
+    }
 
 ?>
 
@@ -59,23 +71,12 @@
   <link rel="stylesheet" type="text/css" href="milktea.css">
 </head>
 <body>
-  <div class="flex">
-    <h1 style="width: 100%; color: white; background-color: brown; text-align: center;">
-       MILKTEA SHOP
-        <marquee style="color: white" >
-            Welcom to our milk tea shop
-            <img src="image/milk.jpg" style="width: 20px; margin-top: 20px;">
-            <img src="image/milk.jpg" style="width: 20px; margin-top: 20px;">
-        </marquee>
-    </h1> 
-  </div>
-
   <div class="header">
     <p>Liên hệ: Nguyễn Yến Nhi</p>
     <p>Địa chỉ: 101B Lê Hữu Trác, Sơn Trà Đà Nẵng</p>
     <p style="margin-right: 400px">Phone: 0354236247</p>
     <form action="index.php" method="">
-      <button name="logout" style="background-color: green">Log out</button>
+      <button name="logout" style="background-color: red">Log out</button>
     </form>
   </div>
 
@@ -94,37 +95,27 @@
   </div>
    
     <div class="menu">
-    <div class="menu a">
-      <a href="indexAdmin.php">TRANG CHỦ</a>
-      <a href="Gioi Thieu">GIỚI THIỆU</a>
-      <a href="Tin Tuc">TIN TỨC</a>
-      <a href="Huong Dan">HƯỚNG DẪN ĐẶT HÀNG</a>
-      <a href="Lien He">LIÊN HỆ</a>
+      <div class="menu a">
+        <a href="indexAdmin.php">TRANG CHỦ</a>
+        <a href="Gioi Thieu">GIỚI THIỆU</a>
+        <a href="Tin Tuc">TIN TỨC</a>
+        <a href="Huong Dan">HƯỚNG DẪN ĐẶT HÀNG</a>
+        <a href="Lien He">LIÊN HỆ</a>
+      </div>
+      <div class="search">
+        <input class="search" type="text" placeholder="Search" name=""> 
+        <!-- <button input class="search" type="text" placeholder="Search" name="">
+            <img src="image/icon.png" alt="icon.png" style="margin-left: 250px" width="15px" height="15px">
+        </button> -->
+      </div>
+      <form action="add.php" method="">
+        <button style="margin-top: 15px; background-color: sandybrown">
+         <img src="image/add.png" alt="add.png" width="15px" height="15px">ADD
+        </button>
+      </form>
     </div>
-    <div class="search">
-      <button input class="search" type="text" placeholder="Search" name="">
-          <img src="image/icon.png" alt="icon.png" style="margin-left: 250px" width="15px" height="15px">
-      </button>
-    </div>
-    <div class="add">
-     <button name="add" style="background-color: green">
-      <img src="image/add.png" alt="add.png" width="15px" height="15px"> Add
-    </button>
-    <!-- <form name="add" method="post">
-      <label>ADD PRODUCT</label>
-      <input type="file" name="img">
-      <label>Name</label>
-      <input type="text" name="name">
-      <label>Type</label>
-      <input type="text" name="type">
-      <label>Price</label>
-      <input type="text" name="price">
-      <form action="indexAdmin.php"><button>OK</button></form>
-    </form> -->
-    </div>
-  </div>
 
-  <!--Hien Thi San Pham--> 
+  <!--Display Product--> 
 
   <div class="milk-container">
     <?php
@@ -135,9 +126,11 @@
       <h1 class="item-milk-name"><?php echo $milkteas[$i]->name ?></h1>
       <p style="color: brown" class="item-milk-type"><?php echo $milkteas[$i]->getType() ?></p>
       <h2 class="item-milk-price"><?php echo $milkteas[$i]->getDisplayPrice() ?></h2>
-      <form action="indexAdmin.php" method="post" class="btn">
-        <button name="edit" style="margin-right: 30px; background-color: brown">Edit</button>
-        <button name="delete" style="margin-left: 30px; background-color: brown" id="btn" type="submit"value="'.$result[$i][0].'">Delete</button>
+      <form action="edit.php" method="post" class="btn">
+        <button type="submit" name="edit" style=" background-color: sandybrown" value="<?php echo $milkteas[$i]->id;?>">Edit</button>
+        </form>
+        <form method="post">
+        <button type="submit" name="delete" style="width: 80px; background-color: red"value="<?php echo $milkteas[$i]->id; ?>">Delete</button>
       </form>
     </div>
 
@@ -148,7 +141,7 @@
       <hr>
       <div class="footer">
         <div class="footer-lienhe">
-          <h1 style="color: black">THÔNG TIN LIÊN HỆ</h1>
+          <h1 style="color: sandybrown">THÔNG TIN LIÊN HỆ</h1>
           <hr>
           <p>Địa Chỉ: 101B Lê Hữu Trác, Sơn Trà, Đà Nẵng</p>
           <p>Phone: 035 4236 247</p>
@@ -156,7 +149,7 @@
           <p>Email: nhi.nguyen@gmail.com</p>
         </div>
         <div class="footer-giaohang">
-          <h1 style="color: black">CHÍNH SÁCH</h1>
+          <h1 style="color: sandybrown">CHÍNH SÁCH</h1>
           <hr>
           <p>Chính Sách Giao Hàng</p>
           <p>Chính Sách Vận CHuyển</p>
@@ -164,7 +157,7 @@
           <p>Khách Hàng Thân Thiết</p>
         </div>
         <div class="footer-menu">
-          <h1 style="color: black">MENU</h1>
+          <h1 style="color: sandybrown">MENU</h1>
           <hr>
           <p>Coffee</p>
           <p>Milk Tea</p>
@@ -175,31 +168,31 @@
 
     <script type="text/javascript">
     
-    var slideIndex = 0;
-    showSlides();
+      var slideIndex = 0;
+      showSlides();
 
-    function showSlides() {
+      function showSlides() {
 
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
 
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";  
-        }
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
 
-          slideIndex++;
+            slideIndex++;
 
-        if (slideIndex > slides.length) {
-          slideIndex = 1
-        } 
+          if (slideIndex > slides.length) {
+            slideIndex = 1
+          } 
 
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-        }
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
 
-          slides[slideIndex-1].style.display = "block";         
-          setTimeout(showSlides, 2000); 
-    }
+            slides[slideIndex-1].style.display = "block";         
+            setTimeout(showSlides, 2000); 
+      }
     </script>    
 </body>
 </html>

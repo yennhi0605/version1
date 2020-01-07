@@ -1,5 +1,28 @@
 <?php
-	require 'main.php';
+	require 'database.php';
+
+	$sql = "SELECT * FROM Users";
+	$result2 = $db->query($sql)->fetch_all();
+	
+	/*====================Log in==========================*/
+
+	if (isset($_POST["login"])) {
+		$uname = $_POST["uname"];
+		$pass = $_POST["psw"];
+		for ($i = 0; $i <count($result2) ; $i++) { 
+			if ($uname == $result2[0][1] && $pass == $result2[0][2]) {
+				if ($result2[$i][4] == "admin") {
+					header ("location:indexAdmin.php") ;
+				}			
+			}elseif ($uname == $result2[1][1] && $pass == $result2[1][2]) {
+				if ($result2[$i][4] == "user") {
+					header ("location:indexUser.php");
+				}				
+			}else{
+				echo "Please enter user again";
+			}
+		}
+	}
 ?>
 <!DOCTYPE html>
 <html>

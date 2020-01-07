@@ -1,7 +1,8 @@
 .header{
 	display: flex;
 	justify-content: space-between;
-	background-color: brown;
+	background-color: black;
+  color: sandybrown;
 }
 
 button{
@@ -12,10 +13,6 @@ button{
   height: 20px;
   margin-top: 20px;
 }
-
-/*image{
-  margin-top: 200px;
-}*/
 
 .container {
   padding: 16px;
@@ -65,11 +62,6 @@ input[type=text], input[type=password] {
   border: 2px solid gray;
 }
 
-.flex{
-    display: flex;
-    margin-top: 0px;
-}
-
 .slideshow-container {
     display: grid;
     grid-template-columns: auto auto;
@@ -86,47 +78,46 @@ input[type=text], input[type=password] {
 .menu{
     display: flex;
     flex-wrap: wrap;
-    background: brown;
+    background: black;
     justify-content: space-between;
 }
 
 .menu a:hover{
-    background-color: gray;
+    background-color: grey;
 }
 
 .menu a{
-    margin: 10px;
+    margin: 20px;
     text-decoration: none;
     text-transform: uppercase;
     justify-content: center;
-    color: white;
+    color: sandybrown;
     margin-top: 15px;
 
 }
-
-/*.button{
-    margin-left: 350px;
-    justify-content: left;
-}
-*/
 
 .menu button{
     margin-top: 0px;
 }
 
-.search{
+/*.search{
     height: 20px;
     width: 300px;
     background: white;
-    border: 1px solid brown;
+    border: 1px solid black;
     border-radius: 10px;
     justify-content: left;
     margin-top: 15px;
-    /*margin-left: 30px;*/
-}
+}*/
 
 .add button{
-  margin-top: 15px;
+ /* margin-top: 15px;*/
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.edit button{
+  /*margin-top: 15px;*/
   border-radius: 5px;
   margin-right: 10px;
 }
@@ -142,6 +133,7 @@ input[type=text], input[type=password] {
   border: 1px solid black;
   margin: 20px;
   border-radius: 10px;
+  background-color: black;
 }
 
 .item-milk-icon {
@@ -151,6 +143,7 @@ input[type=text], input[type=password] {
 .item-milk-name {
   font-size: 20px;
   margin-left: 8px;
+  color: white;
 }
 
 .item-milk-type {
@@ -162,6 +155,7 @@ input[type=text], input[type=password] {
 .item-milk-price{
   font-size: 18px;
   margin-left: 8px;
+  color: white;
 }
 
 .btn{
@@ -177,7 +171,7 @@ input[type=text], input[type=password] {
   display: flex;
   margin-top: 20px;
   justify-content: space-between;
-  background-color: brown;
+  background-color: black;
 }
 .footer-lienhe{
   color: white;
@@ -189,5 +183,8 @@ input[type=text], input[type=password] {
   color: white;
 }
 
+.cart button{
+  margin-top: 15px;
+}
 
 
